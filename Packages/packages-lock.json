@@ -58,6 +58,15 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.inputsystem": {
+      "version": "1.4.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.modules.uielements": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.mathematics": {
       "version": "1.2.6",
       "depth": 1,
@@ -66,14 +75,13 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.netcode.gameobjects": {
-      "version": "1.2.0",
+      "version": "file:C:/Users/chris/Downloads/com.unity.netcode.gameobjects-813c3dc19673eb790e11ed472160dc561855fffe/com.unity.netcode.gameobjects",
       "depth": 0,
-      "source": "registry",
+      "source": "local",
       "dependencies": {
         "com.unity.nuget.mono-cecil": "1.10.1",
-        "com.unity.transport": "1.3.0"
-      },
-      "url": "https://packages.unity.com"
+        "com.unity.transport": "1.2.0"
+      }
     },
     "com.unity.nuget.mono-cecil": {
       "version": "1.10.1",

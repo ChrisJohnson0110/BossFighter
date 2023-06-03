@@ -1710,7 +1710,10 @@ GameObject:
   - component: {fileID: 7243573510689470568}
   - component: {fileID: 3631725863448273426}
   - component: {fileID: -4912739175382648565}
-  - component: {fileID: -366607736530644481}
+  - component: {fileID: -2382740355007904335}
+  - component: {fileID: -3071827938763220629}
+  - component: {fileID: 5598098665128989242}
+  - component: {fileID: -7309937567944694356}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1771,7 +1774,25 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &-366607736530644481
+--- !u!143 &-2382740355007904335
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056243838129496786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.8
+  m_Radius: 0.22
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &-3071827938763220629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1780,9 +1801,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 8056243838129496786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e4b6df49bff0b47a6fddbc474ff645, type: 3}
+  m_Script: {fileID: 11500000, guid: f4136baa32be6b04eb7c60dbca163397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+--- !u!114 &5598098665128989242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056243838129496786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a6e2b397ebec542aace79bc69da9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  networkPosition:
+    m_InternalValue: {x: 0, y: 0, z: 0}
+  networkRotation:
+    m_InternalValue: {x: 0, y: 0, z: 0, w: 1}
+  v3NetworkPositionVelocity: {x: 0, y: 0, z: 0}
+  fNetworkPositionSmoothTime: 0.1
+  fNetworkRotationSmoothTime: 0.1
+--- !u!114 &-7309937567944694356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056243838129496786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50cc56842e3bc446afd025152fca140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fVerticalMovement: 0
+  fHorizontalMovement: 0
+  fMoveAmount: 0
+  fWalkingSpeed: 2
+  fRunningSpeed: 5
+  fRotationSpeed: 15
 --- !u!1 &8100547609144236738
 GameObject:
   m_ObjectHideFlags: 0
