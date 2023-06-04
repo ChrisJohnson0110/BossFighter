@@ -10,5 +10,10 @@ namespace CJ
         {
 
         }
+
+        protected virtual void Update()
+        {
+
+        }
     }
 }

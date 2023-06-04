@@ -8,7 +8,7 @@ namespace CJ
     public class PlayerInputManager : MonoBehaviour
     {
         static PlayerInputManager instance;
-
+        public PlayerManager player;
         public static PlayerInputManager Instance
         {
             get { return instance; }
@@ -16,10 +16,21 @@ namespace CJ
 
         PlayerControls playerControls;
 
-        [SerializeField] Vector2 movement;
+        [Header("Camera Movement Input")]
+        [SerializeField] Vector2 v2CameraInput;
+        [SerializeField] public float fCameraVerticalInput;
+        [SerializeField] public float fCameraHorizontalInput;
+
+        [Header("Player Movement Input")]
+        [SerializeField] Vector2 v2MovementInput;
         [SerializeField] public float fVerticalInput;
         [SerializeField] public float fHorizontalInput;
+
         [SerializeField] public float fMoveAmount;
+
+        [Header("Player Action Input")]
+        [SerializeField] bool bDodgeInput = false;
+
 
         private void Awake()
         {
@@ -65,7 +76,9 @@ namespace CJ
             if (playerControls == null)
             {
                 playerControls = new PlayerControls();
-                playerControls.PlayerMovement.Movement.performed += i => movement = i.ReadValue<Vector2>(); //on joystickmove update vector 2
+                playerControls.PlayerMovement.Movement.performed += i => v2MovementInput = i.ReadValue<Vector2>(); //on left joystickmove update vector 2
+                playerControls.PlayerCamera.Movement.performed += i => v2CameraInput = i.ReadValue<Vector2>(); //on right joystickmove update vector 2
+                playerControls.PlayerActions.Dodge.performed += i => bDodgeInput = true; //on o press
             }
             playerControls.Enable();
         }
@@ -94,13 +107,22 @@ namespace CJ
 
         private void Update()
         {
-            HandleMovementInput();
+            HandleAllInputs();
         }
 
-        private void HandleMovementInput()
+        private void HandleAllInputs()
         {
-            fVerticalInput = movement.y;
-            fHorizontalInput = movement.x;
+            HandlePlayerMovementInput();
+            HandleCameraMovementInput();
+            HandleDodgeInput();
+        }
+
+        //movements
+
+        private void HandlePlayerMovementInput()
+        {
+            fVerticalInput = v2MovementInput.y;
+            fHorizontalInput = v2MovementInput.x;
 
             //get total amount of movement
             fMoveAmount = Mathf.Clamp01(Mathf.Abs(fVerticalInput) + Mathf.Abs(fHorizontalInput));
@@ -115,7 +137,43 @@ namespace CJ
                 fMoveAmount = 1;
             }
 
+            //pass 0 on horizontal to only get non strafing movement
+            //use horizontal when locked on for strafe
+
+            if (player == null)
+            {
+                return;
+            }
+
+            //if not locked only use move amount
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, fMoveAmount);
+
+            //if we are locked on pass on horizontal as well
         }
+
+        private void HandleCameraMovementInput()
+        {
+            fCameraVerticalInput = v2CameraInput.y;
+            fCameraHorizontalInput = v2CameraInput.x;
+
+
+        }
+
+        //actions
+
+        private void HandleDodgeInput()
+        {
+            if (bDodgeInput == true)
+            {
+                bDodgeInput = false;
+
+                //to add if menu open disable ?
+
+                player.playerLocomotionManager.AttemptToPerformDodge();
+            }
+        }
+
+
 
     }
 }

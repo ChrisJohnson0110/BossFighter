@@ -18,6 +18,10 @@ namespace CJ
         public float fNetworkPositionSmoothTime = 0.1f;
         public float fNetworkRotationSmoothTime = 0.1f;
 
+        [Header("Animator")]
+        public NetworkVariable<float> fHorizontalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> fVerticalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+        public NetworkVariable<float> fMoveAmount = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     }
 }
