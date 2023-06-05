@@ -222,7 +222,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Mouse"",
-                    ""id"": ""0b30950f-8af3-451e-b972-5d15f991cb1b"",
+                    ""id"": ""b98a86a6-8499-4281-b5eb-b5159a5164ec"",
                     ""path"": ""2DVector(mode=2)"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -233,7 +233,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""fb86b1f8-3658-4e24-bb69-f9c5ee248dca"",
+                    ""id"": ""0d6e63fd-55f0-462a-a93c-138d8744c9fc"",
                     ""path"": ""<Mouse>/delta/up"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -244,7 +244,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""a1b9a40f-c8ad-4860-9829-828b67a3d4c0"",
+                    ""id"": ""d19a4b11-df7a-4edc-9ed9-c4cf8b6a277a"",
                     ""path"": ""<Mouse>/delta/down"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -255,7 +255,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""5b599c15-ebd8-49e6-9570-2c69223a567a"",
+                    ""id"": ""3964c97b-6b7e-4f3c-87f6-f3bde5e9e7e7"",
                     ""path"": ""<Mouse>/delta/left"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -266,7 +266,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""ddfe22e7-c8d3-4993-b782-e355a1b40b99"",
+                    ""id"": ""3acb29b6-490a-4eed-b224-4583430db9f2"",
                     ""path"": ""<Mouse>/delta/right"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -296,6 +296,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""dae3cf1e-4a42-47e7-8434-a83631895a73"",
                     ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7581e1b-9ac9-4a1e-b4ac-146818a880b7"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

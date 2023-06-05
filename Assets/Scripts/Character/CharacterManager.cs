@@ -14,6 +14,9 @@ namespace CJ
 
         [Header("Flags")]
         public bool bIsPerformingAction = false;
+        public bool bApplyRootMotion = false;
+        public bool bCanRotate = true;
+        public bool bCanMove = true;
 
         protected virtual void Awake()
         {

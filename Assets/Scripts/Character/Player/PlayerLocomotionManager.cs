@@ -55,6 +55,7 @@ namespace CJ
 
         public void HandleAllMovement()
         {
+            
             HandleGroundedMovement();
             HandleRotation();
             //arial movement
@@ -73,6 +74,10 @@ namespace CJ
 
         private void HandleGroundedMovement()
         {
+            if (player.bCanMove == false)
+            {
+                return;
+            }
             GetMovementValues();
 
             //movement dir based on camera persp & input
@@ -97,6 +102,11 @@ namespace CJ
 
         private void HandleRotation()
         {
+            if (player.bCanRotate == false)
+            {
+                return;
+            }
+
             v3TargetRotationDirection = Vector3.zero;
             v3TargetRotationDirection = PlayerCamera.Instance.cameraObject.transform.forward * fVerticalMovement;
             v3TargetRotationDirection = v3TargetRotationDirection + PlayerCamera.Instance.cameraObject.transform.right * fHorizontalMovement;
@@ -115,10 +125,10 @@ namespace CJ
 
         public void AttemptToPerformDodge()
         {
-            //if (player.bIsPerformingAction == true)
-            //{
-            //    return;
-            //}
+            if (player.bIsPerformingAction == true)
+            {
+                return;
+            }
             //if moving roll / otherwise should backstep
             if (fMoveAmount > 0)
             {
@@ -134,9 +144,7 @@ namespace CJ
             }
             else
             {
-
-
-                //perform a backstep animation
+                player.playerAnimatorManager.PlayTargetAnimation("BackStep", true, true);
             }
         }
 
