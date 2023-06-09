@@ -18,6 +18,7 @@ namespace CJ
 
         [SerializeField] float fWalkingSpeed = 2f;
         [SerializeField] float fRunningSpeed = 5f;
+        [SerializeField] float fSprintingSpeed = 8f;
         [SerializeField] float fRotationSpeed = 15f;
 
         [Header("Dodge")]
@@ -47,7 +48,7 @@ namespace CJ
                 fMoveAmount = player.characterNetworkManager.fMoveAmount.Value;
                 
                 //if not locked on
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, fMoveAmount);
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, fMoveAmount, player.playerNetworkManager.bIsSprinting.Value);
 
                 //if locked on
             }
@@ -86,16 +87,24 @@ namespace CJ
             v3MovementDirection.Normalize();
             v3MovementDirection.y = 0;
 
-            if (PlayerInputManager.Instance.fMoveAmount > 0.5f)
+            if (player.playerNetworkManager.bIsSprinting.Value == true)
             {
-                //move - running
-                player.characterController.Move(v3MovementDirection * fRunningSpeed * Time.deltaTime);
+                player.characterController.Move(v3MovementDirection * fSprintingSpeed * Time.deltaTime);
             }
-            else if (PlayerInputManager.Instance.fMoveAmount <= 0.5f)
+            else
             {
-                //move - walking
-                player.characterController.Move(v3MovementDirection * fWalkingSpeed * Time.deltaTime);
+                if (PlayerInputManager.Instance.fMoveAmount > 0.5f)
+                {
+                    //move - running
+                    player.characterController.Move(v3MovementDirection * fRunningSpeed * Time.deltaTime);
+                }
+                else if (PlayerInputManager.Instance.fMoveAmount <= 0.5f)
+                {
+                    //move - walking
+                    player.characterController.Move(v3MovementDirection * fWalkingSpeed * Time.deltaTime);
+                }
             }
+            
 
 
         }
@@ -121,6 +130,25 @@ namespace CJ
             Quaternion newRotation = Quaternion.LookRotation(v3TargetRotationDirection);
             Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, fRotationSpeed * Time.deltaTime);
             transform.rotation = targetRotation;
+        }
+
+        public void HandleSprinting()
+        {
+            if (player.bIsPerformingAction == true)
+            {
+                player.playerNetworkManager.bIsSprinting.Value = false;
+            }
+
+
+
+            if (fMoveAmount >= 0.5f)
+            {
+                player.playerNetworkManager.bIsSprinting.Value = true;
+            }
+            else
+            {
+                player.playerNetworkManager.bIsSprinting.Value = false;
+            }
         }
 
         public void AttemptToPerformDodge()

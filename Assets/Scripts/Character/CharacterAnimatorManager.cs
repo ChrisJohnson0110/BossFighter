@@ -9,21 +9,29 @@ namespace CJ
     {
         CharacterManager character;
 
-        float fVertical;
-        float fHorizontal;
+        int fVertical;
+        int fHorizontal;
 
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
+
+            fVertical = Animator.StringToHash("Vertical");
+            fHorizontal = Animator.StringToHash("Horizontal");
         }
 
-        public void UpdateAnimatorMovementParameters(float a_fHorizontalValue, float a_fVerticalValue)
+        public void UpdateAnimatorMovementParameters(float a_fHorizontalValue, float a_fVerticalValue, bool a_bIsSprinting)
         {
-            character.animator.SetFloat("Horizontal", a_fHorizontalValue, 0.1f, Time.deltaTime);
-            character.animator.SetFloat("Vertical", a_fVerticalValue, 0.1f, Time.deltaTime);
+            float fHorizontalAmount = a_fHorizontalValue;
+            float fVerticalAmount = a_fVerticalValue;
 
-            //can snap values refer tohttps://www.youtube.com/watch?v=i4msADmNMOM&list=PLD_vBJjpCwJvP9F9CeDRiLs08a3ldTpW5&index=6&ab_channel=SebastianGraves
-            //13 minutes into video
+            if (a_bIsSprinting == true)
+            {
+                fVerticalAmount = 2f;
+            }
+
+            character.animator.SetFloat(fHorizontal, fHorizontalAmount, 0.1f, Time.deltaTime);
+            character.animator.SetFloat(fVertical, fVerticalAmount, 0.1f, Time.deltaTime);
         }
 
         public virtual void PlayTargetAnimation(

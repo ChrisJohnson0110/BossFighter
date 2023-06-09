@@ -30,6 +30,7 @@ namespace CJ
 
         [Header("Player Action Input")]
         [SerializeField] bool bDodgeInput = false;
+        [SerializeField] bool bSprintInput = false;
 
 
         private void Awake()
@@ -79,8 +80,12 @@ namespace CJ
                 playerControls.PlayerMovement.Movement.performed += i => v2MovementInput = i.ReadValue<Vector2>(); //on left joystickmove update vector 2
                 playerControls.PlayerCamera.Movement.performed += i => v2CameraInput = i.ReadValue<Vector2>(); //on right joystickmove update vector 2
                 playerControls.PlayerActions.Dodge.performed += i => bDodgeInput = true; //on o press
+                playerControls.PlayerActions.Sprint.performed += i => bSprintInput = true; //sprint down
+                playerControls.PlayerActions.Sprint.canceled += i => bSprintInput = false; //sprint up
+
             }
             playerControls.Enable();
+
         }
 
         private void OnDestroy()
@@ -115,6 +120,7 @@ namespace CJ
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
             HandleDodgeInput();
+            HandleSprinting();
         }
 
         //movements
@@ -146,7 +152,7 @@ namespace CJ
             }
 
             //if not locked only use move amount
-            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, fMoveAmount);
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, fMoveAmount, player.playerNetworkManager.bIsSprinting.Value);
 
             //if we are locked on pass on horizontal as well
         }
@@ -173,7 +179,17 @@ namespace CJ
             }
         }
 
-
+        private void HandleSprinting()
+        {
+            if (bSprintInput == true)
+            {
+                player.playerLocomotionManager.HandleSprinting();
+            }
+            else
+            {
+                player.playerNetworkManager.bIsSprinting.Value = false;
+            }
+        }
 
     }
 }
